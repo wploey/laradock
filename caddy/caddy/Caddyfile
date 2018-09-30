@@ -1,51 +1,84 @@
 # Docs: https://caddyserver.com/docs/caddyfile
-0.0.0.0:80 {
-    root /var/www/public
-    fastcgi / php-fpm:9000 php {
+# 0.0.0.0:80 {
+#     root /var/www/public
+#     fastcgi / php-fpm:9000 php {
+#         index index.php
+#     }
+# 
+#     # To handle .html extensions with laravel change ext to
+#     # ext / .html
+# 
+#     rewrite {
+#         to {path} {path}/ /index.php?{query}
+#     }
+#     gzip
+#     browse
+#     log /var/log/caddy/access.log
+#     errors /var/log/caddy/error.log
+#     # Uncomment to enable TLS (HTTPS)
+#     # Change the first list to listen on port 443 when enabling TLS
+#     #tls self_signed
+# 
+#     # To use Lets encrpt tls with a DNS provider uncomment these
+#     # lines and change the provider as required
+#     #tls {
+#     #  dns cloudflare
+#     #}
+# }
+# 
+# laradock1.demo:80 {
+#     root /var/www/public
+#     # Create a Webhook in git.
+#     #git {
+# 	#repo https://github.com/xxx/xxx
+#     #    path /home/xxx
+#     #    #interval 60
+#     #    hook  webhook laradock
+#     #    hook_type   generic
+#     #}
+# 
+# }
+# 
+# laradock2.demo:80 {
+#     # Create a Proxy and cors.
+#     #proxy domain.com
+# 	#cors
+# }
+# 
+# laradock3.demo:80 {
+#     import authlist.conf
+#     root /var/www/public
+# }
+
+php56.test:80 {
+    root /var/www/php56
+    fastcgi / php-fpm56:9000 php {
         index index.php
     }
-
-    # To handle .html extensions with laravel change ext to
-    # ext / .html
-
     rewrite {
-        to {path} {path}/ /index.php?{query}
+        r .*
+        ext /
+        to /index.php?{query}
     }
     gzip
     browse
-    log /var/log/caddy/access.log
-    errors /var/log/caddy/error.log
-    # Uncomment to enable TLS (HTTPS)
-    # Change the first list to listen on port 443 when enabling TLS
-    #tls self_signed
-
-    # To use Lets encrpt tls with a DNS provider uncomment these
-    # lines and change the provider as required
-    #tls {
-    #  dns cloudflare
-    #}
+    #tls wploey@gmail.com
+    #log /var/www/caddy-access.log
+    #errors /var/www/caddy-error.log
 }
-
-laradock1.demo:80 {
-    root /var/www/public
-    # Create a Webhook in git.
-    #git {
-	#repo https://github.com/xxx/xxx
-    #    path /home/xxx
-    #    #interval 60
-    #    hook  webhook laradock
-    #    hook_type   generic
-    #}
-
-}
-
-laradock2.demo:80 {
-    # Create a Proxy and cors.
-    #proxy domain.com
-	#cors
-}
-
-laradock3.demo:80 {
-    import authlist.conf
-    root /var/www/public
+php72.test:80 {
+    root /var/www/php72
+    fastcgi / php-fpm:9000 php {
+        index index.php
+    }
+    rewrite {
+        r .*
+        ext /
+        to /index.php?{query}
+    }
+    gzip
+    browse
+    #tls wploey@gmail.com
+    #log /var/www/caddy-access.log
+    #errors /var/www/caddy-error.log
 }
